@@ -19,35 +19,28 @@ router.get('/', (req, res)=>{
     })
 });
 
-//Méthode POST pour envoyer les données
+//Méthode POST pour récuperer le formulaire qui contient les données utilisateurs
 router.post('/', (req, res, next)=>{
-    console.log("Le body" + req.body)
+    console.log("Le body " + req.body.score)
     const newScore =  new ScoreUtilisateurModel({
         pseudo : "Unknown",
         score: req.body.score,
     });
-    newScore.save((err,docs) => {
-        if(err) console.log(err);
-        else res.send();
-    })
-    //Compare les deux scores dans la BDD
-    ScoreUtilisateurModel.find({pseudo : "Unknown"}, (err, docs) => {
-        console.log(docs[0].score)
-        console.log(docs[1].score)
+    ScoreUtilisateurModel.findOne({pseudo : "Unknown"}, (err, docs) => {
+        console.log(docs.score)
+        // console.log(docs[1].score)
         if(err){
             console.log(err)
         }else{
-            //console.log(typeof(docs[1].score))
-            if(docs[0].score < docs[1].score){  //Docs retourne l'élement choisi grâce à findOne check https://www.youtube.com/watch?v=OJ0YqgipiG0
-                console.log("On delete la première valeure")
-                scoreAdelete = docs[0].score
-                ScoreUtilisateurModel.findOne({ score:scoreAdelete }).remove().exec();
+            if(docs.score < req.body.score){  
+                console.log("On remplace la valeure par le score du joueur")
+                ScoreUtilisateurModel.findOneAndUpdate({ score : docs.score},{ score : req.body.score }, (err, docs)=>{ //Update du score du joueur
+                    if (err) { throw err; }
+                    else { console.log("Updated"); }
+                });
                 //ScoreUtilisateurModel.delete(docs[0])
             }else{
-                console.log("On delete la deuxième valeure")
-                scoreAdelete = docs[1].score
-                ScoreUtilisateurModel.findOne({ score:scoreAdelete }).remove().exec();
-                //ScoreUtilisateurModel.delete(docs[1])
+                console.log("On ajoute pas la nouvelle valeure")
             }
         }
     })
