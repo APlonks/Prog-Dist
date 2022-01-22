@@ -7,19 +7,8 @@ var bodyParser = require('body-parser')
 // "ScoreUtilisateurModel" est le constructeur présent dans scoreUtilisateurModel.js
 const { ScoreUtilisateurModel } = require('../models/scoreUtilisateurModel');
 
-// const Compte = await ScoreUtilisateurModel.findOne({pseudo : "Unknown"}, (err, docs) =>{})
-
-// if (ScoreUtilisateurModel.findOne({pseudo : "Unknown"}, (err, docs) =>{}) ==  ){
-//     console.log("OUI")
-// }else{
-//     console.log("non")
-// }
-
-console.log("ICI")
-
 // Vérifie l'utilisateur Unknown existe, si il n'existe pas on le créen sinon on affiche son score sur la page de jeu
 router.get('/', (req, res)=>{
-    console.log("ICIII")
     ScoreUtilisateurModel.findOne({pseudo : "Unknown"}, (err, docs) => {
         if(docs == null){
             ScoreUtilisateurModel.create({pseudo : "Unknown", score : 0})
@@ -32,8 +21,10 @@ router.get('/', (req, res)=>{
 });
 
 //Méthode POST pour récuperer le formulaire qui contient les données utilisateurs
+//Attention le app.use("/index", routes); dans app.js signifie qu'ici on commence l'url à partir de http://localhost:8084/index, on aurait pu laisser app.use("/index", routes); 
+//et mettre en dessous router.post('/index', (req, res)=>{ 
+
 router.post('/', (req, res)=>{
-    console.log("LA")
     console.log("Le body " + req.body.score)
     const newScore =  new ScoreUtilisateurModel({
         pseudo : "Unknown",
@@ -57,7 +48,7 @@ router.post('/', (req, res)=>{
             }
         }
     })
-    res.redirect('/about')  //Redirection vers une autre page pour éviter de recevoir la requête sur la page, voir comment régler le problème
+    res.redirect('resultat')  //Redirection vers une autre page pour éviter de recevoir la requête sur la page, voir comment régler le problème
 })
 
 // //Méthode POST pour envoyer les données

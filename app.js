@@ -5,6 +5,7 @@ require("./models/dbConfig");   //Le fichier pour se connecter à la base de don
 const routes = require('./routes/scoreUtilisateurController');
 //const scoreUtilisateurRoutes = require('./routes/scoreUtilisateurController');
 const mongoose = require('mongoose');
+const req = require('express/lib/request');
 //const { counter } = require('./public/js/game.js')
 
 
@@ -36,10 +37,9 @@ app.get('/index', (req, res) => {
 })
 
 //Page about
-app.get('/about', (req, res) => {
-    res.render('about', {text: 'Fin de jeu'})
+app.get('/resultat', (req, res) => {
+    res.render('resultat', {text: 'Fin de jeu'})
 })
-
-//app.all()   //Vérifie si c'est un mauvaise rul
+ 
 
 app.listen(8084, () => console.log('Server started : 8084'));
