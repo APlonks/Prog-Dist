@@ -7,20 +7,33 @@ var bodyParser = require('body-parser')
 // "ScoreUtilisateurModel" est le constructeur présent dans scoreUtilisateurModel.js
 const { ScoreUtilisateurModel } = require('../models/scoreUtilisateurModel');
 
-//Vérifie l'utilisateur Unknown existe, si il n'existe pas on le créen sinon on affiche son score sur la page de jeu
+// const Compte = await ScoreUtilisateurModel.findOne({pseudo : "Unknown"}, (err, docs) =>{})
+
+// if (ScoreUtilisateurModel.findOne({pseudo : "Unknown"}, (err, docs) =>{}) ==  ){
+//     console.log("OUI")
+// }else{
+//     console.log("non")
+// }
+
+console.log("ICI")
+
+// Vérifie l'utilisateur Unknown existe, si il n'existe pas on le créen sinon on affiche son score sur la page de jeu
 router.get('/', (req, res)=>{
+    console.log("ICIII")
     ScoreUtilisateurModel.findOne({pseudo : "Unknown"}, (err, docs) => {
         if(docs == null){
             ScoreUtilisateurModel.create({pseudo : "Unknown", score : 0})
+            res.render('index', {contenu : "0"})
         }else{
             //console.log(docs)
-            res.render('index', {contenu : docs.score})  //Docs retourne l'élement choisi grâce à findOne check https://www.youtube.com/watch?v=OJ0YqgipiG0
+           res.render('index', {contenu : docs.score})  //Docs retourne l'élement choisi grâce à findOne check https://www.youtube.com/watch?v=OJ0YqgipiG0
         }
     })
 });
 
 //Méthode POST pour récuperer le formulaire qui contient les données utilisateurs
-router.post('/', (req, res, next)=>{
+router.post('/', (req, res)=>{
+    console.log("LA")
     console.log("Le body " + req.body.score)
     const newScore =  new ScoreUtilisateurModel({
         pseudo : "Unknown",
@@ -40,7 +53,7 @@ router.post('/', (req, res, next)=>{
                 });
                 //ScoreUtilisateurModel.delete(docs[0])
             }else{
-                console.log("On ajoute pas la nouvelle valeure")
+                console.log("On update pas la nouvelle valeure")
             }
         }
     })
