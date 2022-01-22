@@ -2,7 +2,8 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 require("./models/dbConfig");   //Le fichier pour se connecter à la base de données
-const routes = require('./routes/scoreUtilisateurController');
+const routesIndex = require('./routes/scoreUtilisateurController');
+const routesFirst = require('./routes/firstController');
 //const scoreUtilisateurRoutes = require('./routes/scoreUtilisateurController');
 const mongoose = require('mongoose');
 const req = require('express/lib/request');
@@ -15,7 +16,8 @@ const req = require('express/lib/request');
 app.use(bodyParser.urlencoded({ extended: false })); //JE NE SAIS PAS POURQUOI C'EST NECESSAIRE, On veut que notre requete passe par ce body parser
 app.use(bodyParser.json()); //On fait en sorte de rendre lisible le json 
 
-app.use("/index", routes);  // Un middleware, Pour tous les endpoints qui commencent par / la fonction nous envoie à scoreUtilisateurController
+app.use("/index", routesIndex);  // Un middleware, Pour tous les endpoints qui commencent par / la fonction nous envoie à scoreUtilisateurController
+app.use("/first", routesFirst);
 
 //Static files
 app.use(express.static('public'))

@@ -2,6 +2,7 @@
 
 .type-button,
 .type-button:after {
+  margin : 10px;
   width: 150px;
   height: 76px;
   line-height: 78px;
