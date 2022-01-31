@@ -3,6 +3,8 @@ const router = express.Router();
 
 const { ScoreUtilisateurModel } = require('../models/scoreUtilisateurModel');
 
+// Le controller qui permet de gérer la redirection depuis la page résultat vers la première page en réinitialisant le score de l'utilisateur
+
 router.post('/', (req, res)=>{  //On effectue catch la requête post sur l'url http://localhost:8084/first  , voir app.js
     console.log("Le body " + req.body.score)
     const newScore =  new ScoreUtilisateurModel({

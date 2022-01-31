@@ -3,6 +3,7 @@ const router = express.Router();
 const ObjectID = require('mongoose').Types.ObjectId //Méthode qui permet de récuperer l'id de l'objet
 var bodyParser = require('body-parser')
 
+// Le controller qui permet de gérer les requêtes sur la page du jeu et à la fin du jeu
 
 // "ScoreUtilisateurModel" est le constructeur présent dans scoreUtilisateurModel.js
 const { ScoreUtilisateurModel } = require('../models/scoreUtilisateurModel');
@@ -50,42 +51,5 @@ router.post('/', (req, res)=>{
     })
     res.redirect('resultat')  //Redirection vers une autre page pour éviter de recevoir la requête sur la page, voir comment régler le problème
 })
-
-// //Méthode POST pour envoyer les données
-// router.post('/', (req, res, next)=>{
-//     console.log("Le body" + req.body)
-//     const newScore =  new ScoreUtilisateurModel({
-//         pseudo : "Unknown",
-//         score: req.body.score,
-//     });
-//     newScore.save((err,docs) => {
-//         if(err) console.log(err);
-//         else res.send();
-//     })
-//     res.redirect('/about')  //Redirection vers une autre page pour éviter de recevoir la requête sur la page, voir comment régler le problème
-// })
-
-// //Méthode Get pour récuperer le résultat dans la base de données
-// router.get('/', (req, res)=>{
-//         ScoreUtilisateurModel.findOne({pseudo : "Unknown"}, (err, docs) => {
-//             if(err){
-//                 console.log(err)
-//             }else{
-//                 console.log(docs)
-//                 res.render('index', {contenu : docs.score})  //Docs retourne l'élement choisi grâce à findOne check https://www.youtube.com/watch?v=OJ0YqgipiG0
-//             }
-//         })
-// });
-
-// router.get('/', (req, res)=>{
-//     ScoreUtilisateurModel.find({ObjectID : "61e86edc708efa8cf9df2bdf"}, (err, docs) => {
-//         if(err){
-//             console.log(err)
-//         }else{
-//             console.log(docs)
-//             res.render('index', {contenu : docs[0].score})  //Docs retourne une array des résultats check https://www.youtube.com/watch?v=-NBNF2yURm8, Il faut findOne pour une valeure
-//         }
-//     })
-// });
 
 module.exports = router //Le router est accessible de partout dans le projet
