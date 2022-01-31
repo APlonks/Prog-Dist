@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 
 
 const ScoreUtilisateurModel = mongoose.model(
-    "MoiTestDB", //Le nom de la base de données
+    "Prog-Dist-DB", //Le nom de la base de données
     {
         pseudo : {
             type : String,

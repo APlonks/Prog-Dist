@@ -1,7 +1,7 @@
 //Fichier de configuraiton pour se connecter à la base de données
 
-//lienMongo = "mongodb://localhost:27017/MoiTestDB"   // Quand on est en localhost
-lienMongo = "mongodb://mongo:27017/MoiTestDB"   // Quand on déploie sur docker
+lienMongo = "mongodb://localhost:27017/Prog-Dist-DB"   // Quand on est en localhost
+//lienMongo = "mongodb://mongo:27017/Prog-Dist-DB"   // Quand on déploie sur docker
 
 const mongoose = require ('mongoose')   //pour récuperer toutes les méthodes du package mongoose dans la constante mongoose
 
