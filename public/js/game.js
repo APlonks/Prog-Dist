@@ -1,8 +1,11 @@
+//La génération de bulle a été faite en se basant sur cette vidéo dans le but d'apprendre le javaScript https://www.youtube.com/watch?v=6q-zt0aQ74U
+//Nous avons ensuite le code à ce que nous attendions en retour
+
 const scoreUtilisateur = document.querySelector(".scoreUtilisateur");    //On récupère dans lune variable l'emplacement du score du joueur dans le fichier html
 let counter = 0;    //nombre de points
 
 //Création d'une bulle
-const bubbleMaker = () => { 
+const constructionBulle = () => { 
     const bubble = document.createElement("span");  //On crée un élement html de type de span
     bubble.classList.add("bubble"); //On affecte à l'élement span créé la class bubble
     document.body.appendChild(bubble);  //On ajoute le span au code html
@@ -11,12 +14,12 @@ const bubbleMaker = () => {
     bubble.style.height = size; //On affecte à la hauteur de la bulle la taille obtenu aléatoirement
     bubble.style.width = size;  //On affecte à la largeur de la bulle la taille obtenu aléatoirement
 
-    //bubble.style.top = Math.random() * 100 + 50 + "%";
     bubble.style.top = "100%"; //La bulle apparaît tout en bas de l'écran
     bubble.style.left = Math.random() * 100 + "%";  //La bulle apparaît de manière random sur la largeur de l'écran de l'ecran
 
-    const plusMinus = Math.random() > 0.5 ? 1 : -1; // Si le nombre random est positif alors on récupère 1 sinon on récupère -1 (pour définir dans quel sens va la bulle crée)
-    bubble.style.setProperty("--left", Math.random() * 100 * plusMinus + "%");  //Création de la destination de la bulle sur l'axe des x de l'écran
+    const gaucheDroite = Math.random() > 0.5 ? 1 : -1; // Si le nombre random est positif alors on récupère 1 sinon on récupère -1 (pour définir dans quel sens va la bulle crée)
+    
+    bubble.style.setProperty("--left", Math.random() * 100 * gaucheDroite + "%");  //Création de la destination de la bulle sur l'axe des x de l'écran
 
     bubble.addEventListener("click", () => {    //Ajours un évenement lors du clique sur une bulle
         counter ++; //On incrémente la variable counter si si on a cliqué sur une bulle 
@@ -30,9 +33,13 @@ const bubbleMaker = () => {
 };
 
 
-var x = setInterval(bubbleMaker, 500); // On crée une nouvelle bulle tous les y microsecondes définies
+var x = setInterval(constructionBulle, 500); // On crée une nouvelle bulle tous les y microsecondes définies
+
+
+
 
 setTimeout(() => {  //On stop le jeu au bout z microsecondes définies
+    
     clearInterval(x)    //On stoppe la génération de bulles
     
     setTimeout(() => { //Création d'un formulaire à envoyé peu de temps après la fin du jeu pour laisser au joueur le temps de lciquer sur les dernière bulles encore en vie
