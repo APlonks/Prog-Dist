@@ -4,20 +4,12 @@ const app = express();
 require("./models/dbConfig");   //Le fichier pour se connecter à la base de données
 const routesIndex = require('./routes/scoreUtilisateurController');
 const routesFirst = require('./routes/firstController');
-//const scoreUtilisateurRoutes = require('./routes/scoreUtilisateurController');
-const mongoose = require('mongoose');
-const req = require('express/lib/request');
-//const { counter } = require('./public/js/game.js')
 
-
-//ATTENTION IL FAUT METTRE LE BODY PARSER AU PLUS HAUT DE L'APPLICATION pour pouvoir interpréter du JSON
-
-
-app.use(bodyParser.urlencoded({ extended: false })); //JE NE SAIS PAS POURQUOI C'EST NECESSAIRE, On veut que notre requete passe par ce body parser
+app.use(bodyParser.urlencoded({ extended: false })); 
 app.use(bodyParser.json()); //On fait en sorte de rendre lisible le json 
 
-app.use("/index", routesIndex);  // Un middleware, Pour tous les endpoints qui commencent par / la fonction nous envoie à scoreUtilisateurController
-app.use("/first", routesFirst);
+app.use("/index", routesIndex);  // Un middleware, Pour tous les endpoints qui commencent par /index
+app.use("/first", routesFirst);  // Un middleware, Pour tous les endpoints qui commencent par /first
 
 //Static files
 app.use(express.static('public'))

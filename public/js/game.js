@@ -1,5 +1,5 @@
 //La génération de bulle a été faite en se basant sur cette vidéo dans le but d'apprendre le javaScript https://www.youtube.com/watch?v=6q-zt0aQ74U
-//Nous avons ensuite le code à ce que nous attendions en retour
+//Nous avons ensuite modifié le code de tel manière à ce qu'il correponde à nos attentes
 
 const scoreUtilisateur = document.querySelector(".scoreUtilisateur");    //On récupère dans lune variable l'emplacement du score du joueur dans le fichier html
 let counter = 0;    //nombre de points

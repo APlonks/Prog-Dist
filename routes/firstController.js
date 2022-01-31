@@ -6,14 +6,11 @@ const { ScoreUtilisateurModel } = require('../models/scoreUtilisateurModel');
 // Le controller qui permet de gérer la redirection depuis la page résultat vers la première page en réinitialisant le score de l'utilisateur
 
 router.post('/', (req, res)=>{  //On effectue catch la requête post sur l'url http://localhost:8084/first  , voir app.js
-    console.log("Le body " + req.body.score)
     const newScore =  new ScoreUtilisateurModel({
         pseudo : "Unknown",
         score: req.body.score,
     });
     ScoreUtilisateurModel.findOne({pseudo : "Unknown"}, (err, docs) => {
-        console.log(docs.score)
-        // console.log(docs[1].score)
         if(err){
             console.log(err)
         }else{
@@ -22,7 +19,6 @@ router.post('/', (req, res)=>{  //On effectue catch la requête post sur l'url h
                 if (err) { throw err; }
                 else { console.log("Updated"); }
             });
-            //ScoreUtilisateurModel.delete(docs[0])
         }
     })
     res.redirect('/')  //On se redirige vers la première page qui l'url http://localhost:8084/

@@ -15,7 +15,6 @@ router.get('/', (req, res)=>{
             ScoreUtilisateurModel.create({pseudo : "Unknown", score : 0})
             res.render('index', {contenu : "0"})
         }else{
-            //console.log(docs)
            res.render('index', {contenu : docs.score})  //Docs retourne l'élement choisi grâce à findOne check https://www.youtube.com/watch?v=OJ0YqgipiG0
         }
     })
@@ -26,7 +25,6 @@ router.get('/', (req, res)=>{
 //et mettre en dessous router.post('/index', (req, res)=>{ 
 
 router.post('/', (req, res)=>{
-    console.log("Le body " + req.body.score)
     const newScore =  new ScoreUtilisateurModel({
         pseudo : "Unknown",
         score: req.body.score,

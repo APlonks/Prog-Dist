@@ -1,6 +1,6 @@
 version : '3'
 services:
-  app:  # Premier service qui est l'application en soi
+  app:  # Premier service qui est l'application
     build: .  # On build l'image de l'application à partir du Dockerfile
     container_name: container_appNode # Le nom du conteneur de l'image
     restart : always  # On n'arrête jamais le conteneur
@@ -8,10 +8,12 @@ services:
       - '8084:8084' # On écoute sur le port 8085
     links:
       - mongo
-  mongo:  # Second service qui est la BDD et sui se base sur une image déjà existante
-    image: mongo # L'image sur laquelle on se base qui est dans le docker hub
+  mongo:  # Second service qui est la BDD
+    image: mongo # L'image sur laquelle on se base
     container_name: mongo #Le nom du conteneur de l'image
     ports:
       - '27017:27017' #On écoute sur le port 27017
     expose:
       - "27017"
+
+      
